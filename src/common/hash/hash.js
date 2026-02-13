@@ -1,0 +1,16 @@
+
+import { hash , compare } from "bcrypt"
+
+import { env } from "../../../config/env.service.js"
+
+export const generateHash = async (planText)=>{
+
+    const hashedPassword = await hash(planText , +env.salt)
+    return hashedPassword
+}
+
+export const compareHash = async(planText , hash)=>{
+
+    const isMatched = await compare(planText , hash)
+    return isMatched
+}
