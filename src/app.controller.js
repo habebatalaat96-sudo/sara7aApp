@@ -8,6 +8,7 @@ import { userModel } from './database/model/user.model.js'
 
 import authRouter from './modules/auth/auth.controller.js'
 
+import cors from 'cors'
 export const bootstrap = async () => {
 
 
@@ -15,10 +16,11 @@ export const bootstrap = async () => {
   await databaseConnection()
 
   app.use(express.json())
-    app.use('/users' , authRouter)
+  app.use(cors())
+  app.use('/users', authRouter)
 
 
-  app.use('{dummy}' , (req , res )=> res.status(404).json('invalid route'))
+  app.use('{dummy}', (req, res) => res.status(404).json({ message: `invalid route: ${req.originalUrl}` }))
 
   app.use(globalErrorHandler)
   app.listen(env.port, () => {

@@ -30,3 +30,14 @@ export const findById = async ({
 
     return await model.findById(id)
 }
+
+export const create = async ({
+
+    model ,
+    data
+    
+})=>{
+
+    return await model.create(data)
+
+}
